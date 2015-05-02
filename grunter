@@ -1,5 +1,5 @@
 #!/bin/bash
 
-./$(dirname $0)/bin/checkDefaults.sh;
+bash $(dirname $0)/bin/checkDefaults.sh;
 
-./$(dirname $0)/bin/router.sh $@;
+bash $(dirname $0)/bin/router.sh $@;
