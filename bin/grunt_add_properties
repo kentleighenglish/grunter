@@ -1,0 +1,70 @@
+#!/bin/bash
+source $HOME/gruntvars_vars.sh
+
+if [ $# -eq 0 ]
+	then
+		bash grunt_add
+		exit
+		
+	fi
+
+chosenAlias=$1
+
+echo -e "\e[1mSUCCESS:\e[0m Alias has been set"
+echo
+sleep $sleepTime
+ 
+echo -e "\e[1m-----------------  Step 2/3  -----------------\e[0m"
+echo
+
+read -p "Project Name: " chosenName
+echo
+echo -e "\e[1mSUCCESS:\e[0m Name has been set"
+echo
+echo
+
+echo -e "\e[1m-----------------  Step 3/3  -----------------\e[0m"
+echo
+
+directorySet=0
+export directorySet
+
+while [ $directorySet == 0 ]
+	do
+		read -e -p "Project Directory: " chosenDirectory
+		
+		if [ -d "$chosenDirectory" ]
+			then
+				echo -e "\e[1mSUCCESS:\e[0m Grunt project directory has been set"
+				break
+			else
+				echo -e "\e[1mERROR:\e[0m That directory does not exist"
+				echo -e "\e[1mPlease try again...\e[0m"
+				echo
+			fi
+	done
+
+echo
+sleep $sleepTime
+echo -e "\e[1m-----------------  FINALIZING  -----------------\e[0m"
+echo
+echo -e "\e[1mAdding new project..\e[0m"
+sleep $sleepTime
+echo
+echo -e "\e[1mAdding alias...\e[0m"
+echo $chosenAlias >> $HOME/gruntvars_alias
+echo
+
+sleep $sleepTime
+echo -e "\e[1mAdding name...\e[0m"
+echo "grunt_name_$chosenAlias=\"$chosenName\"" >> $HOME/gruntvars_name.sh
+
+echo
+sleep $sleepTime
+echo -e "\e[1mAdding direcotry...\e[0m"
+echo "grunt_dir_$chosenAlias=\"$chosenDirectory\"" >> $HOME/gruntvars_dir.sh
+echo
+
+echo
+echo -e "\e[1mNEW GRUNT PROJECT ADDED\e[0m"
+echo

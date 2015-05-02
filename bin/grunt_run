@@ -1,0 +1,50 @@
+#!/bin/sh
+#-------------------------------------------------#
+# THIS IS A SCRIPT FOR RUNNING LOCAL GRUNT WATCH  #
+#-------------------------------------------------#
+source $HOME/gruntvars_dir.sh
+source $HOME/gruntvars_name.sh
+gruntMatch=0
+export gruntMatch
+
+if [ $# -eq 0 ]
+	then	
+		echo "|| ERROR: INSUFFICIENT INFORMATION PROVIDED"
+		echo "|| Please provide the grunt project you would like to run"
+		echo "|| Use grunt_list command to see a list of all available projects"
+	fi
+
+if [ ! -z $1 ]
+	then
+		for line in $(cat $HOME/gruntvars_alias)
+			do
+				if [ $1 == $line ]
+					then
+						gruntMatch=1
+						export gruntMatch
+
+						#RUN SCRIPT... FINALLY
+						
+						currentTab=$(guake -g)
+						
+						dirVal="grunt_dir_$1"
+						dir=${!dirVal}
+						
+						nameVal=(grunt_name_$1)
+						name=${!nameVal}
+						name="GRUNT: $name"
+						
+						guake -n "$dir" -r "$name" -e "grunt watch"
+						guake -s "$currentTab"
+						echo "Grunt_run: SUCCESSFUL"
+					fi
+
+			done
+			if [ $gruntMatch == 0 ]
+				then
+					echo "|| Grunt project does not exist"
+					echo "|| Please use grunt_list to find existing projects"
+					echo "|| Alternatively use grunt_create to add a new project"
+				fi
+	fi
+echo
