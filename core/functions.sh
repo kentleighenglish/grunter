@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 #Echo Colours
 r=31m; #red
@@ -20,9 +20,6 @@ printStyled(){
 		output+=("$var");
 	done
 
-	color="$n";
-	# echo -e "$esc$color""$output""$esc$n";
-
 	for key in "${!output[@]}"; do
 		colorInput="${colorVar:$key:1}";
 		color="${!colorInput}";
@@ -42,7 +39,7 @@ printStyled(){
 
 #Global Functions
 printName(){
-	printStyled cyg bbb "[ $gName ]" "$gDesc" "(version $version)";
+	printStyled rrny bnnb	 "$gDesc" "(version $version)" "by" "$gAuthor";
 	echo;
 }
 
@@ -51,5 +48,12 @@ displayError(){
 }
 
 displayHelp(){
-	echo "";
+	printStyled b n "Usage:"
+	printStyled c n "	grunter [option] [parameter]"
+	echo
+	printStyled b n "Available Commands:"
+	for i in "${!helpCommands[@]}"; do
+		printStyled cn nn "	${helpCommands[$i]}" "				${helpCommandsDesc[$i]}"
+	done
+
 }

@@ -1,4 +1,4 @@
- #!/bin/sh
+#!/bin/bash
 source $HOME/gruntvars_dir.sh
 source $HOME/gruntvars_name.sh
 source $HOME/gruntvars_vars.sh

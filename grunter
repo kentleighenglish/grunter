@@ -1,5 +1,3 @@
 #!/bin/bash
 
-bash $(dirname $0)/bin/checkDefaults.sh;
-
-bash $(dirname $0)/bin/router.sh $@;
+$(dirname $0)/bin/router.sh $@;
