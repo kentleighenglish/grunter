@@ -40,11 +40,21 @@ printStyled(){
 #Global Functions
 printName(){
 	printStyled rrny bnnb	 "$gDesc" "(version $version)" "by" "$gAuthor";
-	echo;
 }
 
 displayError(){
-	echo "error";
+	t=$1
+
+	if [ $t ]; then
+		for key in "${errorType[@]}"; do
+			echo $key
+			if [ "$key" == $t ]; then
+					echo  $errorType[$key];
+			fi
+		done
+	fi
+
+	displayHelp
 }
 
 displayHelp(){
@@ -55,5 +65,4 @@ displayHelp(){
 	for i in "${!helpCommands[@]}"; do
 		printStyled cn nn "	${helpCommands[$i]}" "				${helpCommandsDesc[$i]}"
 	done
-
 }

@@ -12,7 +12,22 @@ $(dirname $0)/checkDefaults.sh;
 printName;
 
 if [ $1 ]; then
-	parameter=$1;
+	cmd=$1;
 else
 	displayHelp;
+fi
+
+if [ $cmd ]; then
+	case $cmd in
+		"add" )		echo "add"
+					;;
+		"remove" )	echo "remove"
+					;;
+		"config" )	echo "config"
+					;;
+		"list" )	echo "list"
+					;;
+		* )			displayError invalidCommand
+					;;
+	esac
 fi
