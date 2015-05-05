@@ -21,6 +21,7 @@ case $alias in
 		;;
 esac
 
+
 echo -e "\e[1mNo spaces found [1/3] \e[0m"
 sleep $sleepTime
 
@@ -56,4 +57,4 @@ echo
 
 sleep $sleepTime
 
-bash grunt_add_properties "$alias"
+bash grunt_add_properties "$projectAlias"

@@ -39,22 +39,31 @@ printStyled(){
 
 #Global Functions
 printName(){
-	printStyled rrny bnnb	 "$gDesc" "(version $version)" "by" "$gAuthor";
+	printStyled nbnb bnnn	 "$gDesc" "(version $version)" "by" "$gAuthor";
 }
 
 displayError(){
 	t=$1
 
-	if [ $t ]; then
-		for key in "${errorType[@]}"; do
-			echo $key
-			if [ "$key" == $t ]; then
-					echo  $errorType[$key];
+	if [[ $2 ]]; then
+		showHelp=$2
+	else
+		showHelp=1
+	fi
+
+	if [[ $t != "" ]]; then
+		for key in "${!errorType[@]}"; do
+
+			if [[ "${errorType[$key]}" == "$t" ]]; then
+					printStyled ccr bbn "${errorTypePriority[$key]}" "Error [$key]:" "${errorTypeMsg[$key]}";
+					echo
 			fi
 		done
 	fi
 
-	displayHelp
+	if [[ $showhelp == 1 ]]; then
+		displayHelp
+	fi
 }
 
 displayHelp(){
@@ -65,4 +74,31 @@ displayHelp(){
 	for i in "${!helpCommands[@]}"; do
 		printStyled cn nn "	${helpCommands[$i]}" "				${helpCommandsDesc[$i]}"
 	done
+}
+
+executeCommand(){
+	file=$1
+
+	$(dirname $0)/"$file.sh"
+}
+
+divider(){
+	echoString=$1
+	num=20
+	str="-"
+	v=$(printf "%-${num}s" "$str")
+	border="${v// /-}"
+
+	empty="$(echo "$echoString" | sed 's/./-/g')";
+	
+	echo "$border $echoString $border"
+	echo
+}
+
+pause(){
+	sleep $sleepTime;
+
+
+setUserWorkspace(){
+	echo "dosomething"
 }

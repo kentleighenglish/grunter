@@ -1,15 +1,15 @@
 #!/bin/sh
 version="0.1"
 gName="Grunter"
-gDesc="Grunt Compiler Utility"
+gDesc="Grunt Compiler Project Utility"
 gAuthor="Kentleigh English"
 sleepTime=.2
 
 helpCommands=(
-	"add" 
-	"config" 
-	"remove" 
-	"list"
+	"add	| a" 
+	"config	| c" 
+	"remove	| rm" 
+	"list	| ls"
 	);
 helpCommandsDesc=(
 	"Add a new grunt local" 
@@ -18,11 +18,39 @@ helpCommandsDesc=(
 	"List all currently added grunt locals"
 	);
 
-#Error Type Arrays
-invalidCommandArray=("Invalid Command Passed" 0);
-invalidParameterArray=("Parameter is invalid" 0);
+#Error Type Names
+errorType=(
+	"invalidCommand" 
+	"invalidParameter"
+	"aliasSpaces"
+	"aliasSpecial"
+	"aliasUnique"
+	"aliasEmpty"
+	"nameEmpty"
+	"directoryNotexist"
+	"directoryNoGrunt"
+	)
 
+errorTypeMsg=(
+	"Invalid Command Passed" 
+	"Given parameter is invalid"
+	"Alias must not have spaces; plain letters/numbers only"
+	"Alias must not have special characters; plain letters/numbers only"
+	"Alias already exists (Use grunter list to see existing aliases)"
+	"The project alias cannot be empty"
+	"The project name cannot be empty"
+	"That directory does not exist"
+	"No local Gruntfile.js found in that directory"
+	)
 
-#Error Types
-errorType["invalidCommand"]=invalidCommandArray;
-errorType["invalidParameter"]=invalidParameterArray;
+errorTypePriority=(
+	"Minor" 
+	"Minor"
+	"Input"
+	"Input"
+	"Input"
+	"Input"
+	"Input"
+	"Input"
+	"Input"
+	)

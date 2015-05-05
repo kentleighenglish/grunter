@@ -19,15 +19,15 @@ fi
 
 if [ $cmd ]; then
 	case $cmd in
-		"add" )		echo "add"
-					;;
-		"remove" )	echo "remove"
-					;;
-		"config" )	echo "config"
-					;;
-		"list" )	echo "list"
-					;;
-		* )			displayError invalidCommand
-					;;
+		"add" | "a" 	)	executeCommand add
+							;;
+		"remove" | "rm" )	executeCommand remove
+							;;
+		"config" | "c" 	)	executeCommand config
+							;;
+		"list" | "ls"	)	executeCommand list
+							;;
+		*				)	displayError invalidParameter
+							;;
 	esac
 fi
