@@ -1,5 +1,8 @@
 #!/bin/bash
 
+source $(dirname $0)/../settings/user.sh;
+settingsDir=$(dirname $0)/../settings/user.sh;
+
 #Echo Colours
 r=31m; #red
 g=32m; #green
@@ -87,18 +90,57 @@ divider(){
 	num=20
 	str="-"
 	v=$(printf "%-${num}s" "$str")
-	border="${v// /-}"
+	liner="${v// /-}"
 
 	empty="$(echo "$echoString" | sed 's/./-/g')";
 	
-	echo "$border $echoString $border"
+	echo "$liner $echoString $liner"
 	echo
 }
 
 pause(){
 	sleep $sleepTime;
-
+}
 
 setUserWorkspace(){
-	echo "dosomething"
+	echo
+	echo "Please input your new workspace directory:"
+	
+	if [ $userWorkspace ]; then
+		read -i "$userWorkspace" -e tempWorkspace;
+	else
+		read -e tempWorkspace;
+	fi
+	echo
+	submitUserSetting "userWorkspace" "$tempWorkspace" "Workspace set" 0
+}
+
+submitUserSetting(){
+	varName="$1"
+	varValue="$2"
+	varIgnore="$4"
+
+	if [ "${!varName}" != "" ]
+	then
+		if [[ "$4" == 0 ]]; then
+			while true; do
+				read -p "Overwrite previous setting? " yn
+				case $yn in
+					[Yy]* ) sudo sed -i '/'"$varName"'/ c\'"$varName=$varValue" "$settingsDir"
+							echo "$3"; break;;
+					[Nn]* ) break
+							return false
+							;;
+					* ) echo "Please answer Y (Yes) or N (No).";;
+				esac
+			done
+		else
+			sudo sed -i '/'"$varName"'/ c\'"$varName=$varValue" "$settingsDir"
+
+			#grep 's/$varName c\/$varName=$varValue' "$settingsDir";
+		fi
+	else
+		echo "$varName=$varValue" >> "$settingsDir";
+		echo "$3";
+	fi
 }

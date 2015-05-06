@@ -71,7 +71,7 @@ divider "Step 3/3" #SET THE PROJECT DIRECTORY
 
 while true; do
 	if [[ $userWorkspace ]]; then
-		break
+		break;
 	else
 		echo -e "Would you like to set a default workspace (y/n)? \c"; read yn
 
@@ -79,5 +79,21 @@ while true; do
 			[Yy]	) setUserWorkspace; break;;
 			[Nn]	) break;;
 		esac
+	fi
+done
+
+while true;do
+	echo "Please input the folder location of the project Gruntfile.js:";
+	if [ ! $tempWorkspace ]; then
+		read -e -i "$userWorkspace" projectDirectory;
+	else
+		read -e -i "$tempWorkspace" projectDirectory;
+	fi
+
+	if ls "$projectDirectory""Gruntfile.js" >/dev/null ; then
+		break;
+	else
+		displayError directoryNoGrunt
+		tempWorkspace=$projectDirectory
 	fi
 done
