@@ -1,19 +1,18 @@
 #!/bin/bash
-
 source $(dirname $0)/../settings/user.sh;
 settingsDir=$(dirname $0)/../settings/user.sh;
 
 #Echo Colours
-r=31m; #red
-g=32m; #green
-y=33m; #yellow
-b=34m; #blue
-p=35m; #purple
-c=36m; #cyan
-n=0m;  #none
+colour_r=31m; #red
+colour_g=32m; #green
+colour_y=33m; #yellow
+colour_b=34m; #blue
+colour_p=35m; #purple
+colour_c=36m; #cyan
+colour_n=0m;  #none
 
 printStyled(){
-	colorVar=$1;
+	colourVar=$1;
 	bold=$2;
 	esc="\e["
 	output=();
@@ -24,17 +23,18 @@ printStyled(){
 	done
 
 	for key in "${!output[@]}"; do
-		colorInput="${colorVar:$key:1}";
-		color="${!colorInput}";
+		colourInput="${colourVar:$key:1}";
+		colourVarName="colour_$colourInput"
+		colour="""${!colourVarName}";
 
 		boldInput="${bold:$key:1}";
 		if [[ "$boldInput" == "b" ]]; then
 			boldStyled="1;";
 		else
-			boldStyled='';
+			boldStyled='0';
 		fi
 
-		styledOutput+="$esc$boldStyled$color""${output[$key]}""$esc$n ";
+		styledOutput+="$esc$boldStyled$colour""${output[$key]}""$esc$colour_n ";
 	done
 
 	echo -e "${styledOutput[@]}";
@@ -143,4 +143,31 @@ submitUserSetting(){
 		echo "$varName=$varValue" >> "$settingsDir";
 		echo "$3";
 	fi
+}
+
+submitProject(){
+	chosenAlias=$1
+	chosenName=$2
+	chosenDir=$3
+	
+	
+	#If the project alias already exists
+	if [[ "$4" == 2 ]]; then
+		#Checking to see how many projects under the same alias exist already
+		arrayName="pr_$chosenAlias"
+		echo $arrayName
+		if [ "${!arrayName}" ]; then
+			existingNum="${#arrayName[@]}"
+
+			echo "$existingNum"
+		else
+			echo "does not exist"
+		fi
+
+		#echo "$projectAlias_array+=" >> $(dirname $0)/../lib/projects
+	#if the project did not exist...
+	#else
+
+	fi
+	
 }

@@ -10,6 +10,14 @@ source $(dirname $0)/../core/functions.sh;
 $(dirname $0)/checkDefaults.sh;
 
 printName;
+parameter=()
+if [ $2 ]; then
+	for var in "${@:2}"; do
+		parameter+=("$var");
+	done
+else 
+	parameter="";
+fi
 
 if [ $1 ]; then
 	cmd=$1;
@@ -19,15 +27,17 @@ fi
 
 if [ $cmd ]; then
 	case $cmd in
-		"add" | "a" 	)	executeCommand add
+		"add" | "a" 	)	executeCommand add ${parameter[@]}
 							;;
-		"remove" | "rm" )	executeCommand remove
+		"remove" | "rm" )	executeCommand remove ${parameter[@]}
 							;;
-		"config" | "c" 	)	executeCommand config
+		"config" | "c" 	)	executeCommand config ${parameter[@]}
 							;;
-		"list" | "ls"	)	executeCommand list
+		"list" | "ls"	)	executeCommand list ${parameter[@]}
 							;;
-		*				)	displayError invalidParameter
+		"extend" | "e"	)	executeCommand extend ${parameter[@]}
 							;;
+		*				)	displayError invalidParameter ${parameter[@]
+}							;;
 	esac
 fi
