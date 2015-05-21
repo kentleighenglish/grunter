@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/env bash
 source $(dirname $0)/../core/gVars.sh;
 source $(dirname $0)/../core/functions.sh;
 

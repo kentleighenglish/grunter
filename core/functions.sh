@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/env bash
 source $(dirname $0)/../settings/user.sh;
 settingsDir=$(dirname $0)/../settings/user.sh;
 

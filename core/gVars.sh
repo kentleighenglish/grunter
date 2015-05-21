@@ -10,12 +10,14 @@ helpCommands=(
 	"config	| c" 
 	"remove	| rm" 
 	"list	| ls"
+	"manage	| m"
 	);
 helpCommandsDesc=(
 	"Add a new grunt local" 
 	"Configure grunter settings" 
 	"Remove a grunt local" 
 	"List all currently added grunt locals"
+	"List and stop currently running grunt compilers"
 	);
 
 #Error Type Names

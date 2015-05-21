@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/env bash
 
 #source $(dirname $0)/.pnp_vars;
 #-------------------------------------------#
@@ -35,7 +35,7 @@ if [ $cmd ]; then
 							;;
 		"list" | "ls"	)	executeCommand list ${parameter[@]}
 							;;
-		"extend" | "e"	)	executeCommand extend ${parameter[@]}
+		"manage" | "m"	)	executeCommand extend ${parameter[@]}
 							;;
 		*				)	displayError invalidParameter ${parameter[@]
 }							;;

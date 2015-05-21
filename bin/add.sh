@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/env bash
 
 curDir=$(dirname $0);
 source $curDir/../core/gVars.sh;

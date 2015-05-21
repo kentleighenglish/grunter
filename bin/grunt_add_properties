@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/env bash
 source $HOME/gruntvars_vars.sh
 
 if [ $# -eq 0 ]
