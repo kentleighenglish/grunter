@@ -13,6 +13,8 @@ while true; do
 	case $yn in	
 		[Yy] )		filePath="$(dirname $0)"
 					echo "alias grunter='""$filePath""'" | sed -e "s/bin/grunter/g" >> ~/.bashrc;
+					mkdir "$filePath/../lib/"
+					echo -e "#!/bin/env bash\nprojects=()" > "$filePath/../lib/projects.sh"
 					break;
 					;;
 		[Nn] )		break;

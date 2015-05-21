@@ -151,23 +151,28 @@ submitProject(){
 	chosenDir=$3
 	
 	
+	arrayName="pr_$chosenAlias"
 	#If the project alias already exists
 	if [[ "$4" == 2 ]]; then
-		#Checking to see how many projects under the same alias exist already
-		arrayName="pr_$chosenAlias"
-		echo $arrayName
-		if [ "${!arrayName}" ]; then
-			existingNum="${#arrayName[@]}"
 
-			echo "$existingNum"
-		else
-			echo "does not exist"
-		fi
+		#Checking to see hwo many projects are under the alias previously
+		#newNum=$((existingNum+1))
+		eval existingNum=(\${#$arrayName[@]})
 
-		#echo "$projectAlias_array+=" >> $(dirname $0)/../lib/projects
+		#Printing out the values to projects.sh
+		echo "$arrayName+=""('$arrayName""_$existingNum')" >> $(dirname $0)/../lib/projects.sh
+		echo "$arrayName""_$existingNum=('$2' '\"$3\"')" >> $(dirname $0)/../lib/projects.sh
+		echo >> $(dirname $0)/../lib/projects.sh
+	
 	#if the project did not exist...
-	#else
+	else
+		if [[ "$4" == 1 ]]; then
+			existingNum=0
 
+			echo "projects+=('$arrayName')" >> $(dirname $0)/../lib/projects.sh
+			echo "$arrayName+=""('$arrayName""_$existingNum')" >> $(dirname $0)/../lib/projects.sh
+			echo "$arrayName""_$existingNum=('$2' '\"$3\"')" >> $(dirname $0)/../lib/projects.sh
+		fi
 	fi
 	
 }

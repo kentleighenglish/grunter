@@ -1,5 +1,5 @@
 #!/bin/sh
-version="0.1"
+version="0.3"
 gName="Grunter"
 gDesc="Grunt Compiler Project Utility"
 gAuthor="Kentleigh English"
@@ -7,15 +7,17 @@ sleepTime=.2
 
 helpCommands=(
 	"add	| a" 
+	"run	| r"
 	"config	| c" 
 	"remove	| rm" 
 	"list	| ls"
 	"manage	| m"
 	);
 helpCommandsDesc=(
-	"Add a new grunt local" 
+	"Add a new grunt local project"
+	"Run a grunt local project"
 	"Configure grunter settings" 
-	"Remove a grunt local" 
+	"Remove a grunt local project (or child project)" 
 	"List all currently added grunt locals"
 	"List and stop currently running grunt compilers"
 	);
