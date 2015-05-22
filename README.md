@@ -36,7 +36,7 @@ That's it!
 ###Main
 - Project listing with table display
 - Managing running projects
-- *Adding projects, and sub-projects*
+- **Adding projects, and sub-projects**
 - User configurations
 - Set up help information for commands
 - Remove projects command
