@@ -1,9 +1,10 @@
 # grunter
-### A bash CLI for easy Gruntfile.js management
+#### A bash CLI for easy Gruntfile.js management
 
 #Notice!
 This shell script is still heavily in progress, and as such many vital functions have not yet been implemented.
 If you would like to contribute, or have any requests; feel free to get in touch, I love hearing new ideas.
+
 ---
 
 Trying to switch to a new project or run multiple instances of a grunt compiler can be slow when all the local grunt files are located in different folders.
