@@ -16,6 +16,7 @@ for i in "${!projects[@]}"; do
 	eval curMainAlias=(\${$curAlias[@]})
 	#Loops through array element, such as pr_d_0
 	for project in "${curMainAlias[@]}"; do
+		subProjects+=("${curAlias#pr_}" "${project#pr_}")
 		#Fetch Project name
 		eval projectNames+=\${$project[0]}
 
@@ -24,8 +25,14 @@ for i in "${!projects[@]}"; do
 	done
 done
 
+columns=('Project Aliases' 'Project Sub-locals' 'Project Names' 'Project Directories');
 
 echo "${projectAliases[@]}"
+echo "${subProjects[@]}"
 echo "${projectNames[@]}"
 echo "${projectDirs[@]}"
 echo 
+
+prepTableCols 'Project Aliases' 'Project Sub-locals' 'Project Names' 'Project Directories'
+#prepTableRow 0 
+#renderTable

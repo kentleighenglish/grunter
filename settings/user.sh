@@ -1,1 +1,1 @@
-userWorkspace=/home/kenglish/workspace/RESOURCES/grunt/
+userWorkspace=/home/kenglish/workspace/

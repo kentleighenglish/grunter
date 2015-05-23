@@ -75,7 +75,7 @@ displayHelp(){
 	echo
 	printStyled b n "Available Commands:"
 	for i in "${!helpCommands[@]}"; do
-		printStyled cn nn "	${helpCommands[$i]}" "				${helpCommandsDesc[$i]}"
+		printStyled cn nn "	${helpCommands[$i]}" "			${helpCommandsDesc[$i]}"
 	done
 }
 
@@ -175,4 +175,45 @@ submitProject(){
 		fi
 	fi
 	
+}
+
+#Returns the aliases
+getAliases(){
+	if [ "$1" ]; then
+		aliasVar="pr_$1"
+		echo $aliasVar
+	else
+		echo
+	fi
+
+}
+
+getProjects(){
+	echo
+}
+
+#Prepare table columns
+prepTableCols() {
+	inputArray=()
+	columnsPrepared=0;
+
+	while true; do
+		for i in $1; do
+			echo $1;
+			shift
+		done
+
+		if [ ! "$1" ]; then
+			break;
+		fi
+	done
+	echo ${inputArray[0]}
+
+	for col in ${inputArray[@]}; do
+		echo $col
+	done
+}
+
+createTable(){
+	echo
 }

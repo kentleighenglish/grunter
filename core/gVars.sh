@@ -33,6 +33,9 @@ errorType=(
 	"nameEmpty"
 	"directoryNotexist"
 	"directoryNoGrunt"
+	"tableNoColumns"
+	"tableNoRows"
+	"tableInvalidCount"
 	)
 
 errorTypeMsg=(
@@ -45,6 +48,9 @@ errorTypeMsg=(
 	"The project name cannot be empty"
 	"That directory does not exist"
 	"No local Gruntfile.js found in that directory"
+	"Table cannot be rendered; there are no columns prepared"
+	"Table cannot be rendered; there are no rows prepared"
+	"Table cannot be rendered; the columns and rows are mismatched"
 	)
 
 errorTypePriority=(

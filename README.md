@@ -50,4 +50,4 @@ That's it!
 - Sound notifications for grunt compiler status
 - Webroot search functionality
 - Create update script
-- Convert project data storage from to JSON object
+- Convert project data storage from shell array to JSON object
