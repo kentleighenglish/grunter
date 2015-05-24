@@ -38,6 +38,7 @@ errorType=(
 	"tableInvalidCount"
 	)
 
+#Error Type Message
 errorTypeMsg=(
 	"Invalid Command Passed" 
 	"Given parameter is invalid"
@@ -53,6 +54,7 @@ errorTypeMsg=(
 	"Table cannot be rendered; the columns and rows are mismatched"
 	)
 
+#Error Type (i.e. Critical Error [5]: Bla bla)
 errorTypePriority=(
 	"Minor" 
 	"Minor"
@@ -63,4 +65,7 @@ errorTypePriority=(
 	"Input"
 	"Input"
 	"Input"
+	"Critical"
+	"Critical"
+	"Critical"
 	)
