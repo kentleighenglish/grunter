@@ -315,13 +315,6 @@ renderTable(){
 
 	colNum=0
 	rowNum=0
-	while [[ $colNum -lt "$columnCount" ]]; do
-		for i in eval \${!rowArray_$rowNum[@]}; do
-			echo $i
-		done
-
-		colNum=$(( colNum + 1 ))
-	done
 
 	#Reformatting column headers with dividers
 	for i in ${!columnArray[@]}; do

@@ -34,7 +34,7 @@ That's it!
 ##Planned functions
 
 ###Main
-- Project listing with table display
+- **Project listing with table display**
 - Managing running projects
 - **Adding projects, and sub-projects**
 - User configurations
