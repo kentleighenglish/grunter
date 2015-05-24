@@ -197,23 +197,153 @@ prepTableCols() {
 	inputArray=()
 	columnsPrepared=0;
 
+	count=0
 	while true; do
 		for i in $1; do
-			echo $1;
+			columnArray[$count]="$1"
+			#inputArray[$i]=$i;
+			
 			shift
+			count=$(( count + 1))
 		done
 
 		if [ ! "$1" ]; then
-			break;
+			break
 		fi
 	done
-	echo ${inputArray[0]}
 
-	for col in ${inputArray[@]}; do
-		echo $col
-	done
+	if [ "$columnArray" ]; then
+		columnCount="$count";
+		columnsPrepared=1;
+	fi
 }
 
-createTable(){
-	echo
+prepTableRow() {
+	rowIndex=$1
+	shift
+	
+	#eval rowArray_$rowIndex=();
+
+	if [ "$rowsPreparedPrev" ]; then
+		rowsPrepared=$rowsPreparedPrev
+	else
+		rowsPrepared=0
+	fi
+
+
+	count=0
+	while true; do
+		for i in $1; do
+			eval rowArray_$rowIndex[$count]="$1"
+			
+			shift
+			count=$(( count + 1))
+		done
+
+		if [ ! "$1" ]; then
+			rowVar="rowArray_$rowIndex";
+			break
+		fi
+	done
+
+	if [ "$rowVar" ]; then
+		rowsPrepared=$(( $rowsPrepared + 1 ));
+		rowsPreparedPrev=$rowsPrepared
+	fi
+}
+
+getLongest() {
+	if [ ! "$longest" ]; then
+		longest=0
+	fi
+
+	length=${#1}
+	echo $length
+}
+
+renderTable(){
+	#Checking if all is good to go
+	if [[ ! "$columnsPrepared" == 1 ]]; then
+		displayError tableNoColumns
+	else
+		if [[ "$rowsPrepared" == 0 ]]; then
+			displayError tableNoRows
+		else
+			if [ "$columnCount" -ne "$rowsPrepared" ]; then
+				displayError tableInvalidCount
+			fi
+		fi
+	fi
+
+	#Init
+	vDiv=$1
+	hDiv=$2
+	rowsArray=()
+	divider=":$vDiv:"
+
+	for i in ${!rowArray_0[@]}; do
+		row=()
+
+		cols=()
+		colNum=0
+		while [[ $colNum -lt "$columnCount" ]]; do
+			eval var=\${rowArray_$colNum[$i]}
+
+			while [ ${#var} -gt 85 ]; do
+				#rem=$(( ${#var} - 100 ))
+				var=${var%?}
+			done
+
+			row+=$var
+			
+			#eval getLongest \${rowArray_$colNum[$i]}
+
+			#Checking to see whether it's the last element in array
+			colMax=$(( $colNum + 1 ))
+			if [[ ! $colMax == "$columnCount" ]];then
+				row+="$divider"
+			else
+				row+="\n"
+			fi
+
+			colNum=$(( colNum + 1 ))
+
+		done
+
+		rowsArray[$i]=$row
+	done
+
+	colNum=0
+	rowNum=0
+	while [[ $colNum -lt "$columnCount" ]]; do
+		for i in eval \${!rowArray_$rowNum[@]}; do
+			echo $i
+		done
+
+		colNum=$(( colNum + 1 ))
+	done
+
+	#Reformatting column headers with dividers
+	for i in ${!columnArray[@]}; do
+		newColumnArray+=${columnArray[$i]}
+
+		v=$(( i + 1 ))
+		if [[ ! $v == ${#columnArray[@]} ]];then
+			newColumnArray+=$divider
+		fi
+	done
+
+	#Table header
+	headers=$newColumnArray
+	rows=${rowsArray[@]}
+	
+	dividers="---------------- :|: ----------------------- :|: ------------------------------ :|: ---------------------------------------------------------------------------------------"
+	
+	#separator
+	sep=":"
+
+	outputTable="$dividers\n$headers\n$dividers\n$rows\n$dividers"
+
+	echo -ne $outputTable | column -t -s "$sep"
+
 }

@@ -7,32 +7,38 @@ source $curDir/../settings/user.sh;
 source $curDir/../lib/projects.sh;
 
 #Loops through elements in $projects, such as pr_d
+count=0
 for i in "${!projects[@]}"; do
 	#Removes "pr_" prefix, and adds current alias to array
 	curAlias="${projects[$i]}";
-	projectAliases+=("${curAlias#pr_}")
-
 	
 	eval curMainAlias=(\${$curAlias[@]})
 	#Loops through array element, such as pr_d_0
 	for project in "${curMainAlias[@]}"; do
-		subProjects+=("${curAlias#pr_}" "${project#pr_}")
+		projectAliases[$count]="${curAlias#pr_}"
+		subProjects[$count]="${project#pr_}"
+		
 		#Fetch Project name
-		eval projectNames+=\${$project[0]}
+		eval name=\${$project[0]}
+		projectNames[$count]=$name
+
 
 		#Fetch project directory
-		eval projectDirs+=\${$project[1]}
+		eval projectDirs[$count]=\${$project[1]}
+
+		count=$(( count + 1 ))
 	done
 done
 
-columns=('Project Aliases' 'Project Sub-locals' 'Project Names' 'Project Directories');
+#Encapsulating project names in double quotes
 
-echo "${projectAliases[@]}"
-echo "${subProjects[@]}"
-echo "${projectNames[@]}"
-echo "${projectDirs[@]}"
 echo 
 
+#Preparing table view
 prepTableCols 'Project Aliases' 'Project Sub-locals' 'Project Names' 'Project Directories'
-#prepTableRow 0 
-#renderTable
+prepTableRow 0 "${projectAliases[@]}"
+prepTableRow 1 "${subProjects[@]}"
+prepTableRow 2 "${projectNames[@]}"
+prepTableRow 3 "${projectDirs[@]}"
+#Render table view
+renderTable "|" "-"
