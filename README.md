@@ -35,19 +35,19 @@ That's it!
 
 ###Main
 - **Project listing with table display**
-- Managing running projects
 - **Adding projects, and sub-projects**
+- Run grunt projects (and sub-projects)
+- Managing running projects
+- Remove projects command
 - User configurations
 - Set up help information for commands
-- Remove projects command
-- Run grunt projects (and sub-projects)
 - Basic parameter functionality for commands
 
 ---
 
 ###Future
+- Create update script
+- Convert project data storage from shell array to JSON object
 - System tray icon for running grunt projects
 - Sound notifications for grunt compiler status
 - Webroot search functionality
-- Create update script
-- Convert project data storage from shell array to JSON object

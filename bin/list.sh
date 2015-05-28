@@ -1,5 +1,9 @@
 #!/bin/env bash
 
+#PARAMETERS:
+# - Specify project to list
+# - Filter by name
+
 curDir=$(dirname $0);
 source $curDir/../core/gVars.sh;
 source $curDir/../core/functions.sh;
@@ -30,9 +34,7 @@ for i in "${!projects[@]}"; do
 	done
 done
 
-#Encapsulating project names in double quotes
 
-echo 
 
 #Preparing table view
 prepTableCols 'Project Aliases' 'Project Sub-locals' 'Project Names' 'Project Directories'

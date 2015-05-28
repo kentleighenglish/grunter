@@ -1,7 +1,7 @@
 #!/bin/sh
-version="0.3"
+version="0.4"
 gName="Grunter"
-gDesc="Grunt Compiler Project Utility"
+gDesc="Grunt Project Utility"
 gAuthor="Kentleigh English"
 sleepTime=.2
 
@@ -12,6 +12,7 @@ helpCommands=(
 	"remove	| rm" 
 	"list	| ls"
 	"manage	| m"
+	"help	| h"
 	);
 helpCommandsDesc=(
 	"Add a new grunt local project"
@@ -20,6 +21,7 @@ helpCommandsDesc=(
 	"Remove a grunt local project (or child project)" 
 	"List all currently added grunt locals"
 	"List and stop currently running grunt compilers"
+	"Shows this help info (can show command details too)"
 	);
 
 #Error Type Names
@@ -36,6 +38,8 @@ errorType=(
 	"tableNoColumns"
 	"tableNoRows"
 	"tableInvalidCount"
+	"runNeedsAlias"
+	"runAliasNotExist"
 	)
 
 #Error Type Message
@@ -52,6 +56,8 @@ errorTypeMsg=(
 	"Table cannot be rendered; there are no columns prepared"
 	"Table cannot be rendered; there are no rows prepared"
 	"Table cannot be rendered; the columns and rows are mismatched"
+	"You need to specify an alias"
+	"That alias does not exist"
 	)
 
 #Error Type (i.e. Critical Error [5]: Bla bla)
@@ -68,4 +74,6 @@ errorTypePriority=(
 	"Critical"
 	"Critical"
 	"Critical"
+	"Input"
+	"Input"
 	)

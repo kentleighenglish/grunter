@@ -81,8 +81,16 @@ displayHelp(){
 
 executeCommand(){
 	file=$1
+	parameter=()
+	if [ $2 ]; then
+		for var in "${@:2}"; do
+			parameter+=("$var");
+		done
+	else 
+		parameter="";
+	fi
 
-	$(dirname $0)/"$file.sh"
+	$(dirname $0)/"$file.sh" "${parameter[@]}"
 }
 
 divider(){
@@ -177,21 +185,6 @@ submitProject(){
 	
 }
 
-#Returns the aliases
-getAliases(){
-	if [ "$1" ]; then
-		aliasVar="pr_$1"
-		echo $aliasVar
-	else
-		echo
-	fi
-
-}
-
-getProjects(){
-	echo
-}
-
 #Prepare table columns
 prepTableCols() {
 	inputArray=()
@@ -238,6 +231,7 @@ prepTableRow() {
 			
 			shift
 			count=$(( count + 1))
+			rowColsPrepared=$(( count + 1))
 		done
 
 		if [ ! "$1" ]; then
@@ -268,12 +262,11 @@ renderTable(){
 	else
 		if [[ "$rowsPrepared" == 0 ]]; then
 			displayError tableNoRows
-		else
-			if [ "$columnCount" -ne "$rowsPrepared" ]; then
-				displayError tableInvalidCount
-			fi
 		fi
 	fi
+	rowsPreparedPrev=0
+	rowsPrepared=0
+	columnsPrepared=0
 
 	#Init
 	vDiv=$1
@@ -290,9 +283,15 @@ renderTable(){
 			eval var=\${rowArray_$colNum[$i]}
 
 			while [ ${#var} -gt 85 ]; do
-				#rem=$(( ${#var} - 100 ))
 				var=${var%?}
 			done
+			
+			if [ ${#var} -lt 86 ]; then
+				if [ ${#var} -gt 84 ]; then
+					var="$var.."
+				fi
+			fi
+
 
 			row+=$var
 			
@@ -319,10 +318,12 @@ renderTable(){
 	#Reformatting column headers with dividers
 	for i in ${!columnArray[@]}; do
 		newColumnArray+=${columnArray[$i]}
+		divs+="---------------------"
 
 		v=$(( i + 1 ))
 		if [[ ! $v == ${#columnArray[@]} ]];then
 			newColumnArray+=$divider
+			divs+=$divider
 		fi
 	done
 
@@ -330,7 +331,7 @@ renderTable(){
 	headers=$newColumnArray
 	rows=${rowsArray[@]}
 	
-	dividers="---------------- :|: ----------------------- :|: ------------------------------ :|: ---------------------------------------------------------------------------------------"
+	dividers=$divs
 	
 	#separator
 	sep=":"
@@ -339,4 +340,66 @@ renderTable(){
 
 	echo -ne $outputTable | column -t -s "$sep"
 
+}
+
+#Returns the aliases
+getAliases(){
+	if [ "$1" ]; then
+		aliasVar="pr_$1"
+		echo $aliasVar
+	else
+		echo ${projects[@]}
+	fi
+
+}
+
+#Returns an array holding project info
+getProject(){
+	if [ "$1" ]; then
+		sel=pr_$1
+	else
+		displayError runNeedsAlias
+		exit
+	fi
+
+	if [ ! ${!sel} ]; then
+		displayError runAliasNotExist
+		exit
+	fi
+
+	if [ "$2" ]; then
+		index="$2"
+	fi
+	retProjectName=()
+	retProjectDir=()
+
+	eval cur=(\${$sel[@]})
+	#Loops through array element, such as pr_d_0
+	if [ $index ]; then
+		count=0
+		for project in "${cur[$index]}"; do
+			#Fetch Project name
+			eval name=\${$project[0]}
+
+			#Fetch project directory
+			eval dir=\${$project[1]}
+
+			retProjectName[$count]="$name"
+			retProjectDir[$count]="$dir"
+			count=$(( count + 1 ))
+		done
+	else
+		count=0
+		for project in "${cur[@]}"; do
+			#Fetch Project name
+			eval name=\${$project[0]}
+
+			#Fetch project directory
+			eval dir=\${$project[1]}
+
+			retProjectName[$count]="$name"
+			retProjectDir[$count]="$dir"
+			count=$(( count + 1 ))
+		done
+	fi
 }
