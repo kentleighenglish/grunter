@@ -40,6 +40,7 @@ errorType=(
 	"tableInvalidCount"
 	"runNeedsAlias"
 	"runAliasNotExist"
+	"runSubProjectNotExist"
 	)
 
 #Error Type Message
@@ -58,6 +59,7 @@ errorTypeMsg=(
 	"Table cannot be rendered; the columns and rows are mismatched"
 	"You need to specify an alias"
 	"That alias does not exist"
+	"That sub-project does not exist"
 	)
 
 #Error Type (i.e. Critical Error [5]: Bla bla)
@@ -74,6 +76,7 @@ errorTypePriority=(
 	"Critical"
 	"Critical"
 	"Critical"
+	"Input"
 	"Input"
 	"Input"
 	)

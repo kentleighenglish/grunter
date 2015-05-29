@@ -21,5 +21,12 @@ source $curDir/../lib/projects.sh;
 getProject ${parameter[0]} ${parameter[1]}
 
 for i in ${!retProjectName[@]}; do
-	$curDir/grunter-runtime.sh ${retProjectName[$i]} ${retProjectDir[$i]}
+	dir=${retProjectDir[$i]}
+	temp="${dir%\"}"
+	temp="${temp#\"}"
+	dir=$temp
+
+	if ls $dir; then
+		gnome-terminal --window --working-directory=$dir --command=$curDir/grunter-runtime.sh "${retProjectName[$i]}" &
+	fi
 done

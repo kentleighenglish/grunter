@@ -370,10 +370,16 @@ getProject(){
 	if [ "$2" ]; then
 		index="$2"
 	fi
-	retProjectName=()
-	retProjectDir=()
 
 	eval cur=(\${$sel[@]})
+
+	if [ ! ${cur[$index]} ]; then
+		displayError runSubProjectNotExist
+		exit
+	fi
+	
+	retProjectName=()
+	retProjectDir=()
 	#Loops through array element, such as pr_d_0
 	if [ $index ]; then
 		count=0
