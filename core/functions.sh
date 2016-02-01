@@ -2,7 +2,7 @@
 source $(dirname $0)/../settings/user.sh;
 settingsDir=$(dirname $0)/../settings/user.sh;
 
-#Echo Colours
+#PrintStyled Colours
 colour_r=31m; #red
 colour_g=32m; #green
 colour_y=33m; #yellow
@@ -60,6 +60,7 @@ displayError(){
 			if [[ "${errorType[$key]}" == "$t" ]]; then
 					printStyled ccr bbn "${errorTypePriority[$key]}" "Error [$key]:" "${errorTypeMsg[$key]}";
 					echo
+					exit;
 			fi
 		done
 	fi
@@ -169,7 +170,7 @@ submitProject(){
 
 		#Printing out the values to projects.sh
 		echo "$arrayName+=""('$arrayName""_$existingNum')" >> $(dirname $0)/../lib/projects.sh
-		echo "$arrayName""_$existingNum=('$2' '\"$3\"')" >> $(dirname $0)/../lib/projects.sh
+		echo "$arrayName""_$existingNum=('\"$2\"' '\"$3\"')" >> $(dirname $0)/../lib/projects.sh
 		echo >> $(dirname $0)/../lib/projects.sh
 	
 	#if the project did not exist...
@@ -179,7 +180,7 @@ submitProject(){
 
 			echo "projects+=('$arrayName')" >> $(dirname $0)/../lib/projects.sh
 			echo "$arrayName+=""('$arrayName""_$existingNum')" >> $(dirname $0)/../lib/projects.sh
-			echo "$arrayName""_$existingNum=('$2' '\"$3\"')" >> $(dirname $0)/../lib/projects.sh
+			echo "$arrayName""_$existingNum=('\"$2\"' '\"$3\"')" >> $(dirname $0)/../lib/projects.sh
 		fi
 	fi
 	

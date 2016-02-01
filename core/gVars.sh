@@ -41,6 +41,7 @@ errorType=(
 	"runNeedsAlias"
 	"runAliasNotExist"
 	"runSubProjectNotExist"
+	"projectsFileMissing"
 	)
 
 #Error Type Message
@@ -60,6 +61,7 @@ errorTypeMsg=(
 	"You need to specify an alias"
 	"That alias does not exist"
 	"That sub-project does not exist"
+	"The projects.sh file has been moved or deleted"
 	)
 
 #Error Type (i.e. Critical Error [5]: Bla bla)
@@ -79,4 +81,5 @@ errorTypePriority=(
 	"Input"
 	"Input"
 	"Input"
+	"Critical"
 	)

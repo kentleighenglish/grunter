@@ -41,6 +41,8 @@ if [ $cmd ]; then
 									;;
 		"help"		|	"h"		)	executeCommand help ${parameter[@]}
 									;;
+		"clear"		|	"c"		)	executeCommand clear
+									;;
 		*						)	displayError invalidCommand ${parameter[@]}
 									;;
 	esac

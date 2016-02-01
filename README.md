@@ -1,12 +1,6 @@
 # grunter
 #### A bash CLI for easy Gruntfile.js management
 
-#Notice!
-This shell script is still heavily in progress, and as such many vital functions have not yet been implemented.
-If you would like to contribute, or have any requests; feel free to get in touch, I love hearing new ideas.
-
----
-
 Trying to switch to a new project or run multiple instances of a grunt compiler can be slow when all the local grunt files are located in different folders.
 So I've made `grunter` to store, manage, and run grunt locals all from one CLI.
 
@@ -19,6 +13,12 @@ With grunter, I'd type `grunter r coolwebsite`
 
 
 Ultimately grunter aims to make running multiple grunt compilers (as well as being aware of their status), a simple process that requires little or no action on the users part.
+
+---
+
+#Notice!
+This shell script is still heavily in progress, and as such many vital functions have not yet been implemented.
+If you would like to contribute, or have any requests; feel free to get in touch, I love hearing new ideas.
 
 ##Installation
 
@@ -34,8 +34,8 @@ That's it!
 ##Planned functions
 
 ###Main
-- **Project listing with table display**
-- **Adding projects, and sub-projects**
+- ~~Project listing with table display~~
+- ~~Adding projects, and sub-projects~~
 - Run grunt projects (and sub-projects)
 - Managing running projects
 - Remove projects command

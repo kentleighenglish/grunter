@@ -17,7 +17,7 @@ while true; do
 					echo -e "#!/bin/env bash\nprojects=()" > "$filePath/../lib/projects.sh"
 					break;
 					;;
-		[Nn] )		break;
+		[Nn] )		echo;
 					;;
 		* )			echo;
 					printStyled nrnr bbbb "Please answer" "Y" "or" "N";

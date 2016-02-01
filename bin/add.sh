@@ -107,7 +107,7 @@ while true;do
 		read -e -i "$tempWorkspace" projectDirectory;
 	fi
 
-	if ls "$projectDirectory""Gruntfile.js" 2>/dev/null ; then
+	if ls "$projectDirectory""Gruntfile.js" &> /dev/null; then
 		break;
 	else
 		displayError directoryNoGrunt
